@@ -78,12 +78,6 @@ const MonthlyCalendar = () => {
           );
         }}
       />
-      <Text style={styles.notice}>
-        퀴즈는 한국 시간 오후 2시에 업데이트 돼요.
-      </Text>
-      <Text style={styles.notice}>
-        2시 전에 참여한 경우{"\n"}어제 날짜에 도장이 찍힐 수 있어요.
-      </Text>
     </View>
   );
 };
@@ -125,11 +119,6 @@ const styles = StyleSheet.create({
     width: 25,
     height: 25,
     marginTop: 5,
-  },
-  notice: {
-    textAlign: "center",
-    fontSize: 16,
-    padding: 5,
   },
 });
 
