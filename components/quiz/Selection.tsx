@@ -74,7 +74,7 @@ const Selection = ({
       // dateList 마지막 날짜가 퀴즈 업데이트 다음 날일 때
       setIsDone(true);
     }
-  }, [dateList, date]);
+  }, [dateList, tomorrow]);
 
   useEffect(() => {
     if (options.length > 0 && answer) {
