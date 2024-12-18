@@ -102,26 +102,23 @@ const Index = () => {
       setContent(res.explanation);
       setDate(res.date);
 
+      let data = {
+        date: res.date,
+        quiz: res.title,
+        image: res.url,
+        content: res.explanation,
+      };
+
       const translation = await translateData(res.explanation);
       if (translation !== null) {
+        // web이 아닌 경우
         setContent(translation);
-        const data = {
-          date: res.date,
-          quiz: res.title,
-          image: res.url,
+        data = {
+          ...data,
           content: translation,
         };
-        await AsyncStorage.setItem("quiz", JSON.stringify(data));
-      } else if (translation === null) {
-        // web인 경우
-        const data = {
-          date: res.date,
-          quiz: res.title,
-          image: res.url,
-          content: res.explanation,
-        };
-        await AsyncStorage.setItem("quiz", JSON.stringify(data));
       }
+      await AsyncStorage.setItem("quiz", JSON.stringify(data));
     }
   };
 
