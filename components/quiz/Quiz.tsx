@@ -28,8 +28,8 @@ const Quiz = ({
   options,
   dateList,
 }: quizParams) => {
-  const [result, setResult] = useState("은 퀴즈를 푸셨어요!");
-  const [username, setUsername] = useState("");
+  const [result, setResult] = useState(" 퀴즈를 풀어보세요!");
+  const [username, setUsername] = useState("사용자");
 
   useEffect(() => {
     const callLocalData = async () => {
