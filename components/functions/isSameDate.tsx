@@ -1,21 +1,17 @@
 export const isSameDate = (dateString: string) => {
-  // APOD가 업데이트되는 UTC 시간 생성
-  const nowUTC = new Date();
-  const apodUpdateTimeUTCMinus5 = new Date(
-    nowUTC.getTime() - 5 * 60 * 60 * 1000 // UTC-5로 시간 조정 (5시간 빼기)
-  );
+  // 오늘
+  const today = new Date();
 
-  // UTC-5 기준 자정 설정
-  apodUpdateTimeUTCMinus5.setUTCHours(0, 0, 0, 0);
+  // 어제 날짜
+  const yesterdayDate = new Date(today);
+  yesterdayDate.setDate(today.getDate() - 1);
 
-  const apodUpdateTimeFormatted = `${apodUpdateTimeUTCMinus5.getFullYear()}-${String(
-    apodUpdateTimeUTCMinus5.getMonth() + 1
-  ).padStart(2, "0")}-${String(apodUpdateTimeUTCMinus5.getDate()).padStart(
-    2,
-    "0"
-  )}`;
+  // "yyyy-MM-DD" 형식으로 포맷팅된 어제 날짜
+  const yesterday = `${yesterdayDate.getFullYear()}-${String(
+    yesterdayDate.getMonth() + 1
+  ).padStart(2, "0")}-${String(yesterdayDate.getDate()).padStart(2, "0")}`;
 
-  return dateString === apodUpdateTimeFormatted;
+  return dateString === yesterday;
 };
 
 export const isSameMonth = (dateString: string) => {

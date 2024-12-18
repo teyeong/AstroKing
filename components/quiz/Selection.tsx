@@ -8,7 +8,6 @@ import {
   View,
 } from "react-native";
 import { RadioButton } from "react-native-paper";
-import { isSameDate } from "../functions/isSameDate";
 
 interface selectionProps {
   setCorrectModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -31,6 +30,7 @@ const Selection = ({
 }: selectionProps) => {
   const [checked, setChecked] = useState("");
   const [choices, setChoices] = useState<string[]>([]);
+  const [tomorrow, setTomorrow] = useState("");
 
   const handleClick = async () => {
     if (!checked) {
@@ -41,10 +41,10 @@ const Selection = ({
     setIsDone(true);
     if (checked === answer) {
       setCorrectModal(true);
-      if (dateList[dateList.length - 1] !== date) {
+      if (dateList[dateList.length - 1] !== tomorrow) {
         await AsyncStorage.setItem(
           "dateList",
-          JSON.stringify([...dateList, date])
+          JSON.stringify([...dateList, tomorrow])
         );
       }
     } else {
@@ -52,10 +52,26 @@ const Selection = ({
     }
   };
 
-  useEffect(() => {}, []);
-
+  // 퀴즈 date 기준 다음 날 설정
   useEffect(() => {
-    if (dateList[dateList.length - 1] === date && isSameDate(date) === true) {
+    const dateObj = new Date(date);
+
+    // 하루 더하기
+    dateObj.setDate(dateObj.getDate() + 1);
+
+    // 내일 날짜를 "yyyy-MM-DD" 형식으로 포맷팅
+    setTomorrow(
+      `${dateObj.getFullYear()}-${String(dateObj.getMonth() + 1).padStart(
+        2,
+        "0"
+      )}-${String(dateObj.getDate()).padStart(2, "0")}`
+    );
+  }, [date]);
+
+  // isDone 설정
+  useEffect(() => {
+    if (dateList[dateList.length - 1] === tomorrow) {
+      // dateList 마지막 날짜가 퀴즈 업데이트 다음 날일 때
       setIsDone(true);
     }
   }, [dateList, date]);

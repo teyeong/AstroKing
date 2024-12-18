@@ -1,6 +1,14 @@
 import { Platform } from "react-native";
 
-const apod_url = `https://api.nasa.gov/planetary/apod?api_key=${process.env.EXPO_PUBLIC_APOD_KEY}`;
+const today = new Date();
+const yesterdayDate = new Date(today);
+yesterdayDate.setDate(today.getDate() - 1);
+
+const yesterday = `${yesterdayDate.getFullYear()}-${String(
+  yesterdayDate.getMonth() + 1
+).padStart(2, "0")}-${String(yesterdayDate.getDate()).padStart(2, "0")}`;
+
+const apod_url = `https://api.nasa.gov/planetary/apod?api_key=${process.env.EXPO_PUBLIC_APOD_KEY}&date=${yesterday}`;
 const apod_extra_url = `https://api.nasa.gov/planetary/apod?api_key=${process.env.EXPO_PUBLIC_APOD_KEY}&count=3`;
 const deepl_url = "https://api-free.deepl.com/v2/translate";
 
