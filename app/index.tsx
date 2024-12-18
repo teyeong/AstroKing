@@ -113,10 +113,7 @@ const Index = () => {
       if (translation !== null) {
         // web이 아닌 경우
         setContent(translation);
-        data = {
-          ...data,
-          content: translation,
-        };
+        data.content = translation;
       }
       await AsyncStorage.setItem("quiz", JSON.stringify(data));
     }
