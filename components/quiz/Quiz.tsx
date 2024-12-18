@@ -61,7 +61,7 @@ const Quiz = ({
         ) : (
           <Text style={styles.quiz}>이 사진은 이름이 무엇일까요?</Text>
         )}
-        {image && <Image source={{ uri: image }} style={styles.image} />}
+        {image ? <Image source={{ uri: image }} style={styles.image} /> : null}
         <Text style={styles.content}>{content}</Text>
         {!isDone && (
           <Selection
