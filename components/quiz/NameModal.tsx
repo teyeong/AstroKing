@@ -1,6 +1,12 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useState } from "react";
-import { StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
+import {
+  Dimensions,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { Text } from "react-native-paper";
 
 interface modalProps {
@@ -31,10 +37,12 @@ const NameModal = ({ setModal }: modalProps) => {
   );
 };
 
+// 모달 높이 설정
+const screenHeight = Dimensions.get("screen").height;
+
 const styles = StyleSheet.create({
   bg: {
-    width: "100%",
-    height: "100%",
+    height: screenHeight,
   },
   wrapper: {
     backgroundColor: "#F5F5F5",
